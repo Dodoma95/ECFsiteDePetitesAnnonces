@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <h1 class="mt-3">Nouvelle annonce</h1>
+
+    {{ form(adForm) }}
+
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function () {
+            $('.custom-file input').on('change', function () {
+                let fileName = $(this)[0].files[0].name;
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });
+    </script>
+{% endblock %}

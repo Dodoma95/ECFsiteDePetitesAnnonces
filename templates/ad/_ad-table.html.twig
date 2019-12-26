@@ -1,0 +1,45 @@
+<div>
+    Il y a {{ adList.getTotalItemCount() }} annonces
+</div>
+
+<div class="navigation">
+    {{ knp_pagination_render(adList) }}
+</div>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            {{ knp_pagination_sortable(adList, 'Title', 'a.title') }}
+        </th>
+        <th>Photo</th>
+        <th>UserName</th>
+        <th>CategoryName</th>
+    </tr>
+
+    {% for ad in adList %}
+        <tr>
+            <td>
+                <a href="{{ path('ad-details', {'id': ad.id}) }}">
+                    {{ ad.title }}
+                </a>
+            </td>
+            <td><img src="{{ asset('storage/images/' ~ ad.photo) }}" class="img-fluid"></td>
+            <td> {{ ad.user.fullName }} </td>
+            <td> {{ ad.category.name }}</td>
+            <td>
+                {% if is_granted('ROLE_USER') %}
+                    <a href="{{ path('ad-edit', {'id': ad.id}) }}">
+                        Edit
+                    </a>
+                    <a href="{{ path('ad-delete', {'id': ad.id}) }}">
+                        Supprimer
+                    </a>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+<div class="navigation">
+    {{ knp_pagination_render(adList) }}
+</div>

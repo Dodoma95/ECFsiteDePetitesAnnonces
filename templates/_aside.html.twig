@@ -1,0 +1,14 @@
+<div class="col-md-3">
+    <h3>Categories List</h3>
+    <ul class="list-group">
+        {% for category in categoryList %}
+            <li class="list-group-item">
+                <a href="{{ path('ad-by-category', {'id': category.id}) }}">
+                    {{ category.name }}</a>
+                <span class="badge badge-info badge-pill">
+                    {{ category.ads | length }}
+                </span>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
